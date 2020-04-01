@@ -8,7 +8,7 @@ shallow_clone: true
 skip_tags: true
 
 matrix:
-  fast_finish: true
+  fast_finish: false
 
 cache:
 
@@ -31,6 +31,7 @@ install:
   - Install.cmd
 
 artifacts:
+  - path: "*.zip"
 
 build_script:
   - cd \svn
@@ -43,3 +44,6 @@ after_test:
 
 # to run your custom scripts instead of automatic tests
 test_script:
+  - cd \svn\subversion-%svn_version%
+  - set path=C:\OpenSSL-v111-Win64\bin;\Apache24\bin;\svn\subversion-%svn_version%\Release;%path%
+  - python.exe win-tests.py --release --cleanup || exit 0

@@ -4,11 +4,22 @@ call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary
 cd \downloads\zlib-%zlib_version%
 nmake -f win32/Makefile.msc clean
 nmake -f win32/Makefile.msc
-if exist zlib.lib copy zlib.lib \Apache24\lib\ /y
+copy *.lib \Apache24\lib
+copy *.dll \Apache24\bin
 
-set lib=%lin%;\Apache24\lib
-set include=%include%;\Apache24\include
+set lib=C:\OpenSSL-v111-Win64\lib;\downloads\zlib-%zlib_version%;\Apache24\lib;%lib%
+set include=C:\OpenSSL-v111-Win64\include;\downloads\zlib-%zlib_version%;\Apache24\include;%include%
 
 cd \svn\subversion-%svn_version%
 python gen-make.py --release -t vcproj --vsnet-version=2017 --with-apr-util=C:\Apache24 --with-apr=C:\Apache24 --with-apr-iconv=C:\Apache24 --with-apr_memcache=C:\Apache24 --with-httpd=C:\Apache24 --with-openssl=C:\OpenSSL-v111-Win64 --with-zlib=C:\Apache24 --with-sqlite=C:\downloads\sqlite-amalgamation-%sqlite_version%
-devenv subversion_vcnet.sln /Build "Release|x64" || echo never mind
+devenv subversion_vcnet.sln /Build "Release|x64" || exit 0
+
+md \svn\bin
+md \svn\lib
+md \svn\modules
+cd \svn\subversion-%svn_version%
+for /r %%f in (*.dll, *.exe) do @copy \svn\bin /y
+for /r %%f in (*.lib) do @copy "%%f" \svn\lib /y
+for /r %%f in (*.so) do @copy "%%f" \svn\modules /y
+cd \svn
+zip svn-%svn_version%.zip bin/* lib/* modules/*

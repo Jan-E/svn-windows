@@ -25,6 +25,7 @@ echo Downloading https://www.zlib.net/zlib-%zlib_version%.tar.gz
 appveyor DownloadFile https://www.zlib.net/zlib-%zlib_version%.tar.gz
 7z x -y zlib-%zlib_version%.tar.gz
 7z x -y zlib-%zlib_version%.tar
+copy zlib-%zlib_version%\*.h \Apache24\include > nul
 
 echo Downloading https://github.com/libexpat/libexpat/releases/download/%expat_release%/expat-%expat_version%.tar.gz
 appveyor DownloadFile https://github.com/libexpat/libexpat/releases/download/%expat_release%/expat-%expat_version%.tar.gz
@@ -32,15 +33,13 @@ appveyor DownloadFile https://github.com/libexpat/libexpat/releases/download/%ex
 7z x -y expat-%expat_version%.tar
 copy expat-%expat_version%\lib\*.h \Apache24\include /y > nul
 
-cd \downloads
-dir
-copy zlib-%zlib_version%\*.h \Apache24\include > nul
-
 cd \svn
 echo Downloading https://downloads.apache.org/subversion/subversion-%svn_version%.tar.gz
 appveyor DownloadFile https://downloads.apache.org/subversion/subversion-%svn_version%.tar.gz
 7z x -y subversion-%svn_version%.tar.gz
 7z x -y subversion-%svn_version%.tar
 
-cd subversion-%svn_version%
+dir
+
+cd \svn\subversion-%svn_version%
 dir
