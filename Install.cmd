@@ -1,6 +1,9 @@
 @echo off
 
-cd
+choco install nasm
+dir "C:\Program Files\NASM\nasm.exe"
+set path=%path%;"C:\Program Files\NASM\"
+
 cd \
 
 echo Downloading %httpd_dist%
@@ -12,10 +15,7 @@ dir \Apache24\httpd.h /s
 md \downloads
 cd \downloads
 
-echo Downloading https://www.openssl.org/source/openssl-%openssl_version%.tar.gz
-appveyor DownloadFile https://www.openssl.org/source/openssl-%openssl_version%.tar.gz
-7z x -y openssl-%openssl_version%.tar.gz
-7z x -y openssl-%openssl_version%.tar
+C:\OpenSSL-v111-Win64\bin\openssl version
 
 echo Downloading %sqlite_dist%
 appveyor DownloadFile %sqlite_dist%
@@ -35,7 +35,6 @@ copy expat-%expat_version%\lib\*.h \Apache24\include /y > nul
 cd \downloads
 dir
 copy zlib-%zlib_version%\*.h \Apache24\include > nul
-xcopy openssl-%openssl_version%\include\openssl\*.h \Apache24\include\openssl\ /y > nul
 
 cd \svn
 echo Downloading https://downloads.apache.org/subversion/subversion-%svn_version%.tar.gz
@@ -45,4 +44,3 @@ appveyor DownloadFile https://downloads.apache.org/subversion/subversion-%svn_ve
 
 cd subversion-%svn_version%
 dir
-
