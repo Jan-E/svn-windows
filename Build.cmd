@@ -6,7 +6,6 @@ call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary
 cd \downloads\zlib-%zlib_version%
 nmake -f win32/Makefile.msc clean
 nmake -f win32/Makefile.msc
-dir
 if exist zlib.lib copy zlib.lib \Apache24\lib\ /y
 set lib=%lin%;\Apache24\lib
 set include=%include%;\Apache24\include
