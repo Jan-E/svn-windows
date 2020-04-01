@@ -1,0 +1,43 @@
+version: svn-{branch}.{build}
+
+os: Visual Studio 2019
+
+clone_folder: C:\svn
+shallow_clone: true
+
+skip_tags: true
+
+matrix:
+  fast_finish: true
+
+cache:
+
+environment:
+  matrix:
+    - platform:        "x64"
+      vcversion:       "vs16"
+      svn_version:     "1.10.6"
+      openssl_version: "1.1.1f"
+      zlib_version:    "1.2.11"
+      sqlite_dist:     "https://www.sqlite.org/2020/sqlite-amalgamation-3310100.zip"
+      sqlite_version:  "3310100"
+      httpd_dist:      "https://www.apachelounge.com/download/VS16/binaries/httpd-2.4.43-win64-VS16.zip"
+      httpd_zip:       "httpd-2.4.43-win64-VS16.zip"
+
+install:
+  - cd \svn
+  - Install.cmd %svn_version% %openssl_version% %zlib_version% %sqlite_dist% %httpd_dist%
+
+artifacts:
+
+build_script:
+  - cd \svn
+  - Build.cmd
+
+before_test:
+
+# scripts to run after tests
+after_test:
+
+# to run your custom scripts instead of automatic tests
+test_script:
