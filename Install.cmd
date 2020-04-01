@@ -36,7 +36,6 @@ cd \downloads
 dir
 copy zlib-%zlib_version%\*.h \Apache24\include > nul
 xcopy openssl-%openssl_version%\include\openssl\*.h \Apache24\include\openssl\ /y > nul
-copy sqlite-amalgamation-%sqlite_version%\*.* \Apache24\include /y > nul
 
 cd \svn
 echo Downloading https://downloads.apache.org/subversion/subversion-%svn_version%.tar.gz
