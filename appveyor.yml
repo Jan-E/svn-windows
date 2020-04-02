@@ -30,14 +30,13 @@ install:
   - cd \svn
   - Install.cmd
 
-artifacts:
-  - path: "*.zip"
-
 build_script:
   - cd \svn
   - Build.cmd
 
 before_test:
+  - cd \svn
+  - Artifact.cmd
 
 # scripts to run after tests
 after_test:
@@ -47,3 +46,6 @@ test_script:
   - cd \svn\subversion-%svn_version%
   - set path=C:\OpenSSL-v111-Win64\bin;\Apache24\bin;\svn\subversion-%svn_version%\Release;%path%
   - python.exe win-tests.py --release --cleanup || exit 0
+
+artifacts:
+  - path: "*.zip"
