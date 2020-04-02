@@ -6,4 +6,4 @@ for /r %%f in (*.dll, *.exe) do @copy "%%f" \svn\bin /y
 for /r %%f in (*.lib) do @copy "%%f" \svn\lib /y
 for /r %%f in (*.so) do @copy "%%f" \svn\modules /y
 cd \svn
-7z a svn-%svn_version%-%platform%.zip bin/* lib/* modules/*
+7z a svn-%svn_version%-%vcversion%-%platform%.zip bin/* lib/* modules/*

@@ -1,11 +1,6 @@
 @echo off
 
-choco install nasm
-dir "C:\Program Files\NASM\nasm.exe"
-set path=%path%;"C:\Program Files\NASM\"
-
 cd \
-
 echo Downloading %httpd_dist%
 appveyor DownloadFile %httpd_dist%
 echo extracting httpd to \Apache24
@@ -15,7 +10,8 @@ dir \Apache24\httpd.h /s
 md \downloads
 cd \downloads
 
-C:\OpenSSL-v111-Win64\bin\openssl version
+if "%platform%"=="x64" C:\OpenSSL-v111-Win64\bin\openssl version
+if "%platform%"=="x86" C:\OpenSSL-v111-Win32\bin\openssl version
 
 echo Downloading %sqlite_dist%
 appveyor DownloadFile %sqlite_dist%

@@ -14,10 +14,19 @@ cache:
 
 environment:
   matrix:
+    - platform:        "x86"
+      vcversion:       "vs16"
+      svn_version:     "1.10.6"
+      zlib_version:    "1.2.11"
+      expat_release:   "R_2_2_9"
+      expat_version:   "2.2.9"
+      sqlite_dist:     "https://www.sqlite.org/2020/sqlite-amalgamation-3310100.zip"
+      sqlite_version:  "3310100"
+      httpd_dist:      "https://www.apachelounge.com/download/VS16/binaries/httpd-2.4.43-win32-VS16.zip"
+      httpd_zip:       "httpd-2.4.43-win32-VS16.zip"
     - platform:        "x64"
       vcversion:       "vs16"
       svn_version:     "1.10.6"
-      openssl_version: "1.1.1e"
       zlib_version:    "1.2.11"
       expat_release:   "R_2_2_9"
       expat_version:   "2.2.9"
@@ -44,7 +53,8 @@ after_test:
 # to run your custom scripts instead of automatic tests
 test_script:
   - cd \svn\subversion-%svn_version%
-  - set path=C:\OpenSSL-v111-Win64\bin;\Apache24\bin;\svn\subversion-%svn_version%\Release;%path%
+  - if "%platform%"=="x64" set path=C:\OpenSSL-v111-Win64\bin;\Apache24\bin;\svn\subversion-%svn_version%\Release;%path%
+  - if "%platform%"=="x86" set path=C:\OpenSSL-v111-Win32\bin;\Apache24\bin;\svn\subversion-%svn_version%\Release;%path%
   - python.exe win-tests.py --release --cleanup || exit 0
 
 artifacts:
