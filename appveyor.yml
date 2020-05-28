@@ -55,7 +55,7 @@ test_script:
   - cd \svn\subversion-%svn_version%
   - if "%platform%"=="x64" set path=C:\OpenSSL-v111-Win64\bin;\Apache24\bin;\svn\subversion-%svn_version%\Release;%path%
   - if "%platform%"=="x86" set path=C:\OpenSSL-v111-Win32\bin;\Apache24\bin;\svn\subversion-%svn_version%\Release;%path%
-  - python.exe win-tests.py --release --cleanup || exit 0
+  - C:\Python38\python.exe win-tests.py --release --cleanup || exit 0
 
 artifacts:
   - path: "*.zip"
