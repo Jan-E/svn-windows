@@ -24,9 +24,9 @@ if not exist zlib-%zlib_version%\zlib.h 7z x -y zlib-%zlib_version%.tar
 copy zlib-%zlib_version%\*.h \Apache24\include > nul
 
 echo Downloading https://github.com/libexpat/libexpat/releases/download/%expat_release%/expat-%expat_version%.tar.gz
-if not exist copy expat-%expat_version%\lib\expat.h appveyor DownloadFile https://github.com/libexpat/libexpat/releases/download/%expat_release%/expat-%expat_version%.tar.gz
-if not exist copy expat-%expat_version%\lib\expat.h 7z x -y expat-%expat_version%.tar.gz
-if not exist copy expat-%expat_version%\lib\expat.h 7z x -y expat-%expat_version%.tar
+if not exist expat-%expat_version%\lib\expat.h appveyor DownloadFile https://github.com/libexpat/libexpat/releases/download/%expat_release%/expat-%expat_version%.tar.gz
+if not exist expat-%expat_version%\lib\expat.h 7z x -y expat-%expat_version%.tar.gz
+if not exist expat-%expat_version%\lib\expat.h 7z x -y expat-%expat_version%.tar
 copy expat-%expat_version%\lib\*.h \Apache24\include /y > nul
 
 cd \svn

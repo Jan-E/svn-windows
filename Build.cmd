@@ -4,15 +4,15 @@ if "%platform%"=="x64" call "C:\Program Files (x86)\Microsoft Visual Studio\2019
 if "%platform%"=="x86" call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars32.bat"
 
 cd \downloads\zlib-%zlib_version%
-if exist \downloads\zlib-%zlib_version%\%platform%\zlib.lib goto zlib_done
+if exist %platform%\zlib.lib goto zlib_done
 md %platform%
 nmake -f win32/Makefile.msc clean > nul
 nmake -f win32/Makefile.msc
 copy *.lib %platform%
 copy *.dll %platform%
 :zlib_done
-copy zlib-%zlib_version%\%platform%\lib\*.lib \Apache24\lib
-copy zlib-%zlib_version%\%platform%\lib\*.dll \Apache24\bin
+copy %platform%\*.lib \Apache24\lib
+copy %platform%\*.dll \Apache24\bin
 
 if "%platform%"=="x64" set lib=C:\OpenSSL-v111-Win64\lib;\downloads\zlib-%zlib_version%\%platform%;\Apache24\lib;%lib%
 if "%platform%"=="x64" set include=C:\OpenSSL-v111-Win64\include;\downloads\zlib-%zlib_version%;\Apache24\include;%include%
