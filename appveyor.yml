@@ -25,6 +25,7 @@ environment:
       sqlite_version:  "3310100"
       httpd_dist:      "https://www.apachelounge.com/download/VS16/binaries/httpd-2.4.43-win64-VS16.zip"
       httpd_zip:       "httpd-2.4.43-win64-VS16.zip"
+      run_build:       "yes"
       run_tests:       "no"
     - platform:        "x64"
       vcversion:       "vs16"
@@ -36,17 +37,7 @@ environment:
       sqlite_version:  "3310100"
       httpd_dist:      "https://www.apachelounge.com/download/VS16/binaries/httpd-2.4.43-win64-VS16.zip"
       httpd_zip:       "httpd-2.4.43-win64-VS16.zip"
-      run_tests:       "yes"
-    - platform:        "x86"
-      vcversion:       "vs16"
-      svn_version:     "1.14.0"
-      zlib_version:    "1.2.11"
-      expat_release:   "R_2_2_9"
-      expat_version:   "2.2.9"
-      sqlite_dist:     "https://www.sqlite.org/2020/sqlite-amalgamation-3310100.zip"
-      sqlite_version:  "3310100"
-      httpd_dist:      "https://www.apachelounge.com/download/VS16/binaries/httpd-2.4.43-win32-VS16.zip"
-      httpd_zip:       "httpd-2.4.43-win32-VS16.zip"
+      run_build:       "no"
       run_tests:       "yes"
 
 install:
@@ -66,9 +57,13 @@ after_test:
 
 # to run your custom scripts instead of automatic tests
 test_script:
-  - cd \svn\subversion-%svn_version%
-  - if "%platform%"=="x64" set path=C:\OpenSSL-v111-Win64\bin;\Apache24\bin;\svn\subversion-%svn_version%\Release;%path%
-  - if "%platform%"=="x86" set path=C:\OpenSSL-v111-Win32\bin;\Apache24\bin;\svn\subversion-%svn_version%\Release;%path%
+  - cd \downloads\subversion-%svn_version%
+  - dir \downloads\zlib-%zlib_version%
+  - dir \downloads\subversion-%svn_version%
+  - if exist \downloads\subversion-%svn_version%\Release dir \downloads\subversion-%svn_version%\Release
+  - if "%run_tests%"=="yes" dir \downloads\subversion-%svn_version%\Release || exit 0
+  - if "%platform%"=="x64" set path=C:\OpenSSL-v111-Win64\bin;\Apache24\bin;\downloads\subversion-%svn_version%\Release;%path%
+  - if "%platform%"=="x86" set path=C:\OpenSSL-v111-Win32\bin;\Apache24\bin;\downloads\subversion-%svn_version%\Release;%path%
   - if "%platform%"=="x64" if "%run_tests%"=="yes" C:\Python27-x64\python.exe win-tests.py --release --cleanup || exit 0
   - if "%platform%"=="x86" if "%run_tests%"=="yes" C:\Python27\python.exe win-tests.py --release --cleanup || exit 0
 
