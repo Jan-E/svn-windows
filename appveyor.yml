@@ -16,7 +16,7 @@ environment:
   matrix:
     - platform:        "x86"
       vcversion:       "vs16"
-      svn_version:     "1.10.6"
+      svn_version:     "1.14.0"
       zlib_version:    "1.2.11"
       expat_release:   "R_2_2_9"
       expat_version:   "2.2.9"
@@ -26,7 +26,7 @@ environment:
       httpd_zip:       "httpd-2.4.43-win32-VS16.zip"
     - platform:        "x64"
       vcversion:       "vs16"
-      svn_version:     "1.10.6"
+      svn_version:     "1.14.0"
       zlib_version:    "1.2.11"
       expat_release:   "R_2_2_9"
       expat_version:   "2.2.9"
@@ -55,7 +55,7 @@ test_script:
   - cd \svn\subversion-%svn_version%
   - if "%platform%"=="x64" set path=C:\OpenSSL-v111-Win64\bin;\Apache24\bin;\svn\subversion-%svn_version%\Release;%path%
   - if "%platform%"=="x86" set path=C:\OpenSSL-v111-Win32\bin;\Apache24\bin;\svn\subversion-%svn_version%\Release;%path%
-  - python.exe win-tests.py --release --cleanup || exit 0
+  - C:\Python38\python.exe win-tests.py --release --cleanup || exit 0
 
 artifacts:
   - path: "*.zip"
