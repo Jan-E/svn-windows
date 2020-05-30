@@ -34,10 +34,12 @@ if "%run_build%"=="no" exit 0
 
 if "%platform%"=="x64" echo C:\Python27-x64\python gen-make.py --release -t vcproj --vsnet-version=2017 --with-apr-util=C:\Apache24 --with-apr=C:\Apache24 --with-apr-iconv=C:\Apache24 --with-apr_memcache=C:\Apache24 --with-httpd=C:\Apache24 --with-openssl=C:\OpenSSL-v111-Win64 --with-zlib=C:\Apache24 --with-sqlite=C:\downloads\sqlite-amalgamation-%sqlite_version%
 if "%platform%"=="x64" C:\Python27-x64\python gen-make.py --release -t vcproj --vsnet-version=2017 --with-apr-util=C:\Apache24 --with-apr=C:\Apache24 --with-apr-iconv=C:\Apache24 --with-apr_memcache=C:\Apache24 --with-httpd=C:\Apache24 --with-openssl=C:\OpenSSL-v111-Win64 --with-zlib=C:\Apache24 --with-sqlite=C:\downloads\sqlite-amalgamation-%sqlite_version%
-if "%run_tests%"=="no" if "%platform%"=="x64" devenv subversion_vcnet.sln /Clean || exit 0
+if "%run_tests%"=="no" if "%platform%"=="x64" devenv subversion_vcnet.sln /Clean "Release|x64" || exit 0
+if "%run_tests%"=="no" if "%platform%"=="x64" devenv subversion_vcnet.sln /Clean "Release|Win32" || exit 0
 if "%platform%"=="x64" devenv subversion_vcnet.sln /Build "Release|x64" || exit 0
 
 if "%platform%"=="x86" echo C:\Python27\python gen-make.py --release -t vcproj --vsnet-version=2017 --with-apr-util=C:\Apache24 --with-apr=C:\Apache24 --with-apr-iconv=C:\Apache24 --with-apr_memcache=C:\Apache24 --with-httpd=C:\Apache24 --with-openssl=C:\OpenSSL-v111-Win32 --with-zlib=C:\Apache24 --with-sqlite=C:\downloads\sqlite-amalgamation-%sqlite_version%
 if "%platform%"=="x86" C:\Python27\python gen-make.py --release -t vcproj --vsnet-version=2017 --with-apr-util=C:\Apache24 --with-apr=C:\Apache24 --with-apr-iconv=C:\Apache24 --with-apr_memcache=C:\Apache24 --with-httpd=C:\Apache24 --with-openssl=C:\OpenSSL-v111-Win32 --with-zlib=C:\Apache24 --with-sqlite=C:\downloads\sqlite-amalgamation-%sqlite_version%
-if "%platform%"=="x86" devenv subversion_vcnet.sln /Clean || exit 0
+if "%platform%"=="x86" devenv subversion_vcnet.sln /Clean "Release|x64" || exit 0
+if "%platform%"=="x86" devenv subversion_vcnet.sln /Clean "Release|Win32" || exit 0
 if "%platform%"=="x86" devenv subversion_vcnet.sln /Build "Release|Win32" || exit 0
