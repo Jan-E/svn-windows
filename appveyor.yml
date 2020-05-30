@@ -37,7 +37,7 @@ environment:
       sqlite_version:  "3310100"
       httpd_dist:      "https://www.apachelounge.com/download/VS16/binaries/httpd-2.4.43-win64-VS16.zip"
       httpd_zip:       "httpd-2.4.43-win64-VS16.zip"
-      run_build:       "no"
+      run_build:       "yes"
       run_tests:       "yes"
 
 install:
