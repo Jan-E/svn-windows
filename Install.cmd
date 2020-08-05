@@ -18,14 +18,6 @@ echo Downloading %sqlite_dist%
 if not exist sqlite-amalgamation-%sqlite_version%.zip appveyor DownloadFile %sqlite_dist%
 7z x -y "sqlite-amalgamation-%sqlite_version%.zip"
 
-if not exist zlib-%zlib_version%\zlib.h echo Downloading https://www.zlib.net/zlib-%zlib_version%.tar.gz
-if not exist zlib-%zlib_version%\zlib.h appveyor DownloadFile https://www.zlib.net/zlib-%zlib_version%.tar.gz
-if not exist zlib-%zlib_version%\zlib.h 7z x -y zlib-%zlib_version%.tar.gz
-if not exist zlib-%zlib_version%\zlib.h 7z x -y zlib-%zlib_version%.tar
-copy zlib-%zlib_version%\*.h \Apache24\include /y
-if exist zlib-%zlib_version%\%platform%\*.lib copy zlib-%zlib_version%\%platform%\*.lib \Apache24\lib /y
-if exist zlib-%zlib_version%\%platform%\*.dll copy zlib-%zlib_version%\%platform%\*.lib \Apache24\dll /y
-
 if not exist expat-%expat_version%\lib\expat.h echo Downloading https://github.com/libexpat/libexpat/releases/download/%expat_release%/expat-%expat_version%.tar.gz
 if not exist expat-%expat_version%\lib\expat.h appveyor DownloadFile https://github.com/libexpat/libexpat/releases/download/%expat_release%/expat-%expat_version%.tar.gz
 if not exist expat-%expat_version%\lib\expat.h 7z x -y expat-%expat_version%.tar.gz
