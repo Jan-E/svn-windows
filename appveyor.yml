@@ -1,6 +1,6 @@
 version: svn-{branch}.{build}
 
-os: Visual Studio 2019
+image: Visual Studio 2019
 
 clone_folder: C:\svn
 shallow_clone: true
@@ -70,7 +70,6 @@ after_test:
 # to run your custom scripts instead of automatic tests
 test_script:
   - cd \downloads\subversion-%svn_version%
-  - dir \downloads\zlib-%zlib_version%
   - dir \downloads\subversion-%svn_version%
   - if exist \downloads\subversion-%svn_version%\Release dir \downloads\subversion-%svn_version%\Release
   - if "%run_tests%"=="yes" dir \downloads\subversion-%svn_version%\Release || exit 0

@@ -30,6 +30,6 @@ if not exist subversion-%svn_version%\gen-make.py 7z x -y subversion-%svn_versio
 if not exist subversion-%svn_version%\gen-make.py 7z x -y subversion-%svn_version%.tar
 
 dir \downloads
-dir \downloads\zlib-%zlib_version%
+if exist \downloads\zlib-%zlib_version% dir \downloads\zlib-%zlib_version%
 dir \downloads\subversion-%svn_version%
 if exist \downloads\subversion-%svn_version%\Release dir \downloads\subversion-%svn_version%\Release

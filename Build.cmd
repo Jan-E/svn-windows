@@ -1,24 +1,13 @@
 echo build.cmd
 
-if "%platform%"=="x64" call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64.bat"
+if "%vcversion%"=="vs16" if "%platform%"=="x64" call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64.bat"
+if "%vcversion%"=="vs16" if "%platform%"=="x86" call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars32.bat"
 
-if "%platform%"=="x86" call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars32.bat"
-
-cd \downloads\zlib-%zlib_version%
-dir
-if exist %platform%\zlib.lib dir %platform%
-if exist %platform%\zlib.lib goto zlib_done
-md %platform%
-nmake -f win32/Makefile.msc clean > nul
-nmake -f win32/Makefile.msc
-copy *.lib %platform%
-copy *.dll %platform%
-:zlib_done
-copy %platform%\*.lib \Apache24\lib /y
-copy %platform%\*.dll \Apache24\bin /y
+if "%vcversion%"=="vc15" if "%platform%"=="x64" call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars64.bat"
+if "%vcversion%"=="vc15" if "%platform%"=="x86" call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars32.bat"
 
 dir \downloads
-dir \downloads\zlib-%zlib_version%
+if exist \downloads\zlib-%zlib_version% dir \downloads\zlib-%zlib_version%
 dir \downloads\subversion-%svn_version%
 if exist \downloads\subversion-%svn_version%\Release dir \downloads\subversion-%svn_version%\Release
 
