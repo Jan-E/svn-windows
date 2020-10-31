@@ -18,9 +18,9 @@ if "%platform%"=="x86" set lib=C:\OpenSSL-v111-Win32\lib;\downloads\zlib-%zlib_v
 if "%platform%"=="x86" set include=C:\OpenSSL-v111-Win32\include;\downloads\zlib-%zlib_version%;\Apache24\include;%include%
 
 cd \downloads\serf-1.3.9
-nmake /s /nologo /f \svn\serf.mak CLEAN APR_SRC=C:\Apache24 APRUTIL_SRC=C:\Apache24 ZLIB_SRC=C:\Apache24 OPENSSL_SRC=C:\Apache24 || exit 0
-if "%platform%"=="x64" nmake /s /nologo /f \svn\serf.mak ALL APR_SRC=C:\Apache24 APRUTIL_SRC=C:\Apache24 ZLIB_SRC=C:\Apache24 OPENSSL_SRC=C:\OpenSSL-v111-Win64
-if "%platform%"=="x86" nmake /s /nologo /f \svn\serf.mak ALL APR_SRC=C:\Apache24 APRUTIL_SRC=C:\Apache24 ZLIB_SRC=C:\Apache24 OPENSSL_SRC=C:\OpenSSL-v111-Win32
+                                              nmake /s /nologo /f \svn\serf.mak CLEAN APR_SRC=C:\Apache24 APRUTIL_SRC=C:\Apache24 ZLIB_SRC=C:\Apache24 OPENSSL_SRC=C:\Apache24 || exit 0
+if "%run_tests%"=="no" if "%platform%"=="x64" nmake /s /nologo /f \svn\serf.mak ALL APR_SRC=C:\Apache24 APRUTIL_SRC=C:\Apache24 ZLIB_SRC=C:\Apache24 OPENSSL_SRC=C:\OpenSSL-v111-Win64
+                       if "%platform%"=="x86" nmake /s /nologo /f \svn\serf.mak ALL APR_SRC=C:\Apache24 APRUTIL_SRC=C:\Apache24 ZLIB_SRC=C:\Apache24 OPENSSL_SRC=C:\OpenSSL-v111-Win32
 if exist Release\serf-1.lib copy Release\serf-1.lib . /y
 
 cd \downloads\subversion-%svn_version%
