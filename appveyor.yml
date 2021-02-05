@@ -27,7 +27,7 @@ environment:
       httpd_zip:       "httpd-2.4.46-win64-VS16.zip"
       run_clean:       "yes"
       run_build:       "yes"
-      run_tests:       "yes"
+      run_tests:       "no"
     - platform:        "x64"
       vcversion:       "vs16"
       svn_version:     "1.14.1"
