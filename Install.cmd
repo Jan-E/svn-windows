@@ -24,8 +24,8 @@ if not exist expat-%expat_version%\lib\expat.h 7z x -y expat-%expat_version%.tar
 if not exist expat-%expat_version%\lib\expat.h 7z x -y expat-%expat_version%.tar
 copy expat-%expat_version%\lib\*.h \Apache24\include /y
 
-if not exist subversion-%svn_version%\gen-make.py echo Downloading https://downloads.apache.org/subversion/subversion-%svn_version%.tar.gz
-if not exist subversion-%svn_version%\gen-make.py appveyor DownloadFile https://downloads.apache.org/subversion/subversion-%svn_version%.tar.gz
+if not exist subversion-%svn_version%\gen-make.py echo Downloading https://dist.apache.org/repos/dist/dev/subversion/subversion-%svn_version%.tar.gz
+if not exist subversion-%svn_version%\gen-make.py appveyor DownloadFile https://dist.apache.org/repos/dist/dev/subversion/subversion-%svn_version%.tar.gz
 if not exist subversion-%svn_version%\gen-make.py 7z x -y subversion-%svn_version%.tar.gz
 if not exist subversion-%svn_version%\gen-make.py 7z x -y subversion-%svn_version%.tar
 
